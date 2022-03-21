@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_countup/logic/logic.dart';
+import 'package:riverpod_countup/logic/count_data_logic.dart';
 import 'package:riverpod_countup/provider.dart';
 
 class ViewModel {
