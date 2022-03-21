@@ -1,4 +1,4 @@
-import 'package:riverpod_countup/data/count_data.dart';
+import 'package:riverpod_countup/model/count_data/count_data.dart';
 
 class CountDataLogic {
   CountData _countData = const CountData(count: 0, countUp: 0, countDown: 0);

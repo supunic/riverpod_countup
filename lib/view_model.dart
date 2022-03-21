@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_countup/data/count_data.dart';
+import 'package:riverpod_countup/model/count_data/count_data.dart';
 import 'package:riverpod_countup/logic/count_data_logic.dart';
 import 'package:riverpod_countup/logic/sound_logic.dart';
 import 'package:riverpod_countup/provider.dart';
