@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_countup/state/provider.dart';
+import 'package:riverpod_countup/provider/view/home_provider.dart';
 import 'package:riverpod_countup/view_model/home_view_model.dart';
 
 // ConsumerStatefulWidget
