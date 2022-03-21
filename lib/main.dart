@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/data/count_data.dart';
 import 'package:riverpod_countup/provider.dart';
+import 'package:riverpod_countup/view_model.dart';
 
 void main() {
   // MyApp 内で ProviderScope を使えるように wrap
@@ -36,6 +37,15 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
+  ViewModel _viewModel = ViewModel();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _viewModel.setRef(ref);
+  }
+
   @override
   Widget build(BuildContext context) {
     print('MyHomePage rebuild');
@@ -53,7 +63,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               ref.watch(messageProvider),
             ),
             Text(
-              ref.watch(countDataProvider).count.toString(),
+              _viewModel.count,
               style: Theme.of(context).textTheme.headline4,
             ),
             Row(
@@ -90,17 +100,8 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // countDataProvider.select() で
-                // freezed オブジェクト内で特定のプロパティにアクセスを制限する
-                // -> そのプロパティに更新が入った時のみ rebuild されるようになる
-                Text(
-                  ref
-                      .watch(countDataProvider.select((value) => value.countUp))
-                      .toString(),
-                ),
-                Text(ref
-                    .watch(countDataProvider.select((value) => value.countDown))
-                    .toString()),
+                Text(_viewModel.countUp),
+                Text(_viewModel.countDown),
               ],
             ),
           ],
