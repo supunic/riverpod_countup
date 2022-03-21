@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_countup/provider.dart';
 
 void main() {
   // MyApp 内で ProviderScope を使えるように wrap
@@ -37,14 +38,16 @@ class MyHomePage extends ConsumerWidget {
     // WidgetRef ... riverpod の provider とアクセスできる
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          ref.watch(titleProvider),
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              ref.watch(messageProvider),
             ),
             Text(
               '$_counter',
