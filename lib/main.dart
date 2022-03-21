@@ -90,8 +90,17 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(ref.watch(countDataProvider).countUp.toString()),
-                Text(ref.watch(countDataProvider).countDown.toString()),
+                // countDataProvider.select() で
+                // freezed オブジェクト内で特定のプロパティにアクセスを制限する
+                // -> そのプロパティに更新が入った時のみ rebuild されるようになる
+                Text(
+                  ref
+                      .watch(countDataProvider.select((value) => value.countUp))
+                      .toString(),
+                ),
+                Text(ref
+                    .watch(countDataProvider.select((value) => value.countDown))
+                    .toString()),
               ],
             ),
           ],
