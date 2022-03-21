@@ -59,12 +59,16 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: Consumer(
-        builder: (context, ref, child) => FloatingActionButton(
-          onPressed: () =>
-              ref.watch(countProvider.state).update((state) => state + 1),
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
+        builder: (context, ref, child) {
+          print('button rebuild');
+          return FloatingActionButton(
+            // ref.watch -> ref.read にすると、button の rebuild がされなくなる
+            onPressed: () =>
+                ref.read(countProvider.state).update((state) => state + 1),
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          );
+        },
       ),
     );
   }
