@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_countup/provider.dart';
-import 'package:riverpod_countup/view_model.dart';
+import 'package:riverpod_countup/state/provider.dart';
+import 'package:riverpod_countup/view_model/home_view_model.dart';
 
 void main() {
   // MyApp 内で ProviderScope を使えるように wrap
@@ -36,13 +36,13 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-  final ViewModel _viewModel = ViewModel();
+  final HomeViewModel _homeViewModel = HomeViewModel();
 
   @override
   void initState() {
     super.initState();
 
-    _viewModel.setRef(ref);
+    _homeViewModel.setRef(ref);
   }
 
   @override
@@ -62,7 +62,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               ref.watch(messageProvider),
             ),
             Text(
-              _viewModel.count,
+              _homeViewModel.count,
               style: Theme.of(context).textTheme.headline4,
             ),
             Row(
@@ -70,12 +70,12 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               children: [
                 FloatingActionButton(
                     // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-                    onPressed: _viewModel.onIncrease,
+                    onPressed: _homeViewModel.onIncrease,
                     tooltip: 'Increment',
                     child: const Icon(CupertinoIcons.plus)),
                 FloatingActionButton(
                     // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-                    onPressed: _viewModel.onDecrease,
+                    onPressed: _homeViewModel.onDecrease,
                     tooltip: 'Decrement',
                     child: const Icon(CupertinoIcons.minus))
               ],
@@ -83,15 +83,15 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(_viewModel.countUp),
-                Text(_viewModel.countDown),
+                Text(_homeViewModel.countUp),
+                Text(_homeViewModel.countDown),
               ],
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _viewModel.onReset,
+        onPressed: _homeViewModel.onReset,
         tooltip: 'Refresh',
         child: const Icon(Icons.refresh),
       ),

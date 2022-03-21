@@ -2,9 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/count_data/count_data.dart';
 import 'package:riverpod_countup/logic/count_data_logic.dart';
 import 'package:riverpod_countup/logic/sound_logic.dart';
-import 'package:riverpod_countup/provider.dart';
+import 'package:riverpod_countup/state/provider.dart';
 
-class ViewModel {
+class HomeViewModel {
   final CountDataLogic _countDataLogic = CountDataLogic();
   final SoundLogic _soundLogic = SoundLogic();
 

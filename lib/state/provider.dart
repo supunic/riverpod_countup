@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'model/count_data/count_data.dart';
+import '../model/count_data/count_data.dart';
 
 final titleProvider = Provider<String>((ref) => 'Riverpod Demo Home Page');
 
