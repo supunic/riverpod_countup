@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_countup/data/count_data.dart';
 import 'package:riverpod_countup/provider.dart';
 import 'package:riverpod_countup/view_model.dart';
 
@@ -37,7 +36,7 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-  ViewModel _viewModel = ViewModel();
+  final ViewModel _viewModel = ViewModel();
 
   @override
   void initState() {
@@ -71,28 +70,12 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               children: [
                 FloatingActionButton(
                     // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-                    onPressed: () {
-                      CountData countData = ref.read(countDataProvider);
-                      ref
-                          .read(countDataProvider.state)
-                          .update((state) => countData.copyWith(
-                                count: state.count + 1,
-                                countUp: state.countUp + 1,
-                              ));
-                    },
+                    onPressed: _viewModel.onIncrease,
                     tooltip: 'Increment',
                     child: const Icon(CupertinoIcons.plus)),
                 FloatingActionButton(
                     // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-                    onPressed: () {
-                      CountData countData = ref.read(countDataProvider);
-                      ref
-                          .read(countDataProvider.state)
-                          .update((state) => countData.copyWith(
-                                count: state.count - 1,
-                                countDown: state.countDown + 1,
-                              ));
-                    },
+                    onPressed: _viewModel.onDecrease,
                     tooltip: 'Decrement',
                     child: const Icon(CupertinoIcons.minus))
               ],
@@ -108,15 +91,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ref.read(countDataProvider.state).update((state) => const CountData(
-                  count: 0,
-                  countUp: 0,
-                  countDown: 0,
-                ));
-          },
-          tooltip: 'Refresh',
-          child: const Icon(Icons.refresh)),
+        onPressed: _viewModel.onReset,
+        tooltip: 'Refresh',
+        child: const Icon(Icons.refresh),
+      ),
     );
   }
 }

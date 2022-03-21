@@ -9,50 +9,50 @@ void main() {
   });
 
   test('init', () async {
-    expect(target.count, 0);
-    expect(target.countUp, 0);
-    expect(target.countDown, 0);
+    expect(target.countData.count, 0);
+    expect(target.countData.countUp, 0);
+    expect(target.countData.countDown, 0);
   });
 
   test('increase', () async {
     target.increase();
-    expect(target.count, 1);
-    expect(target.countUp, 1);
-    expect(target.countDown, 0);
+    expect(target.countData.count, 1);
+    expect(target.countData.countUp, 1);
+    expect(target.countData.countDown, 0);
 
     target.increase();
     target.increase();
     target.increase();
-    expect(target.count, 4);
-    expect(target.countUp, 4);
-    expect(target.countDown, 0);
+    expect(target.countData.count, 4);
+    expect(target.countData.countUp, 4);
+    expect(target.countData.countDown, 0);
   });
 
   test('decrease', () async {
     target.decrease();
-    expect(target.count, -1);
-    expect(target.countUp, 0);
-    expect(target.countDown, 1);
+    expect(target.countData.count, -1);
+    expect(target.countData.countUp, 0);
+    expect(target.countData.countDown, 1);
 
     target.decrease();
     target.decrease();
     target.decrease();
-    expect(target.count, -4);
-    expect(target.countUp, 0);
-    expect(target.countDown, 4);
+    expect(target.countData.count, -4);
+    expect(target.countData.countUp, 0);
+    expect(target.countData.countDown, 4);
   });
 
   test('reset', () async {
     target.increase();
     target.increase();
     target.decrease();
-    expect(target.count, 1);
-    expect(target.countUp, 2);
-    expect(target.countDown, 1);
+    expect(target.countData.count, 1);
+    expect(target.countData.countUp, 2);
+    expect(target.countData.countDown, 1);
 
     target.reset();
-    expect(target.count, 0);
-    expect(target.countUp, 0);
-    expect(target.countDown, 0);
+    expect(target.countData.count, 0);
+    expect(target.countData.countUp, 0);
+    expect(target.countData.countDown, 0);
   });
 }
