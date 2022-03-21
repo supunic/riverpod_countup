@@ -6,9 +6,7 @@ class SoundLogic {
   static const soundDataDown = 'sounds/sound_data_down.mp3';
   static const soundDataReset = 'sounds/sound_data_reset.mp3';
 
-  final AudioCache _cache = AudioCache(
-    fixedPlayer: AudioPlayer(),
-  );
+  final AudioCache _cache = AudioCache(fixedPlayer: AudioPlayer());
 
   void load() {
     _cache.loadAll([soundDataUp, soundDataDown, soundDataReset]);
@@ -16,23 +14,23 @@ class SoundLogic {
 
   void valueChanged(CountData oldData, CountData newData) {
     if (newData.countUp == 0 && newData.countDown == 0 && newData.count == 0) {
-      playResetSound();
+      _playResetSound();
     } else if (oldData.countUp + 1 == newData.countUp) {
-      playUpSound();
+      _playUpSound();
     } else if (oldData.countDown + 1 == newData.countDown) {
-      playDownSound();
+      _playDownSound();
     }
   }
 
-  void playUpSound() {
+  void _playUpSound() {
     _cache.play(soundDataUp);
   }
 
-  void playDownSound() {
+  void _playDownSound() {
     _cache.play(soundDataDown);
   }
 
-  void playResetSound() {
+  void _playResetSound() {
     _cache.play(soundDataReset);
   }
 }
