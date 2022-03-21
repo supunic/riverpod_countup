@@ -24,38 +24,48 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends ConsumerWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // WidgetRef ... riverpod の provider とアクセスできる
+  Widget build(BuildContext context) {
+    print('MyHomePage rebuild');
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          ref.watch(titleProvider),
+        // Consumer を使うことで、変更箇所のみ更新が入り、
+        // MyHomePage が毎回毎回 rebuild されなくなる
+        title: Consumer(
+          builder: (BuildContext context, WidgetRef ref, Widget? child) => Text(
+            ref.watch(titleProvider),
+          ),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              ref.watch(messageProvider),
+            Consumer(
+              builder: (context, ref, child) => Text(
+                ref.watch(messageProvider),
+              ),
             ),
-            Text(
-              ref.watch(countProvider).toString(),
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Consumer(
+              builder: (context, ref, child) => Text(
+                ref.watch(countProvider).toString(),
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            ref.watch(countProvider.state).update((state) => state + 1),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: Consumer(
+        builder: (context, ref, child) => FloatingActionButton(
+          onPressed: () =>
+              ref.watch(countProvider.state).update((state) => state + 1),
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+      ),
     );
   }
 }
