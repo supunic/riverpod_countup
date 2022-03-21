@@ -2,10 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod_countup/logic/count_data_logic.dart';
 
 void main() {
-  Logic target = Logic();
+  CountDataLogic target = CountDataLogic();
 
   setUp(() async {
-    target = Logic();
+    target = CountDataLogic();
   });
 
   test('init', () async {

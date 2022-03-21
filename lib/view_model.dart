@@ -3,7 +3,7 @@ import 'package:riverpod_countup/logic/count_data_logic.dart';
 import 'package:riverpod_countup/provider.dart';
 
 class ViewModel {
-  Logic _logic = Logic();
+  final CountDataLogic _countDataLogic = CountDataLogic();
 
   late WidgetRef _ref;
 
@@ -19,19 +19,25 @@ class ViewModel {
   get countDown => _ref
       .watch(countDataProvider.select((value) => value.countDown))
       .toString();
-  
+
   void onIncrease() {
-    _logic.increase();
-    _ref.watch(countDataProvider.state).update((state) => _logic.countData);
+    _countDataLogic.increase();
+    _ref
+        .watch(countDataProvider.state)
+        .update((state) => _countDataLogic.countData);
   }
 
   void onDecrease() {
-    _logic.decrease();
-    _ref.watch(countDataProvider.state).update((state) => _logic.countData);
+    _countDataLogic.decrease();
+    _ref
+        .watch(countDataProvider.state)
+        .update((state) => _countDataLogic.countData);
   }
 
   void onReset() {
-    _logic.reset();
-    _ref.watch(countDataProvider.state).update((state) => _logic.countData);
+    _countDataLogic.reset();
+    _ref
+        .watch(countDataProvider.state)
+        .update((state) => _countDataLogic.countData);
   }
 }
