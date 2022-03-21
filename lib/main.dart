@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_countup/data/count_data.dart';
 import 'package:riverpod_countup/provider.dart';
 
 void main() {
@@ -52,7 +53,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               ref.watch(messageProvider),
             ),
             Text(
-              ref.watch(countProvider).toString(),
+              ref.watch(countDataProvider).count.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
             Row(
@@ -60,34 +61,50 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               children: [
                 FloatingActionButton(
                     // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-                    onPressed: () => ref
-                        .read(countProvider.state)
-                        .update((state) => state + 1),
+                    onPressed: () {
+                      CountData countData = ref.read(countDataProvider);
+                      ref
+                          .read(countDataProvider.state)
+                          .update((state) => countData.copyWith(
+                                count: state.count + 1,
+                                countUp: state.countUp + 1,
+                              ));
+                    },
                     tooltip: 'Increment',
                     child: const Icon(CupertinoIcons.plus)),
                 FloatingActionButton(
                     // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-                    onPressed: () => ref
-                        .read(countProvider.state)
-                        .update((state) => state + 1),
+                    onPressed: () {
+                      CountData countData = ref.read(countDataProvider);
+                      ref
+                          .read(countDataProvider.state)
+                          .update((state) => countData.copyWith(
+                                count: state.count - 1,
+                                countDown: state.countDown + 1,
+                              ));
+                    },
                     tooltip: 'Decrement',
                     child: const Icon(CupertinoIcons.minus))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
-                Text('1'),
-                Text('2'),
+              children: [
+                Text(ref.watch(countDataProvider).countUp.toString()),
+                Text(ref.watch(countDataProvider).countDown.toString()),
               ],
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          // ref.watch -> ref.read にすると、button の rebuild がされなくなる
-          onPressed: () =>
-              ref.read(countProvider.state).update((state) => state + 1),
+          onPressed: () {
+            ref.read(countDataProvider.state).update((state) => const CountData(
+                  count: 0,
+                  countUp: 0,
+                  countDown: 0,
+                ));
+          },
           tooltip: 'Refresh',
           child: const Icon(Icons.refresh)),
     );
