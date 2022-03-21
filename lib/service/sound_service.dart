@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:riverpod_countup/model/count_data/count_data.dart';
 
-class SoundLogic {
+class SoundService {
   static const soundDataUp = 'sounds/sound_data_up.mp3';
   static const soundDataDown = 'sounds/sound_data_down.mp3';
   static const soundDataReset = 'sounds/sound_data_reset.mp3';

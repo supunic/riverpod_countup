@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:riverpod_countup/logic/count_data_logic.dart';
+import 'package:riverpod_countup/service/count_data_service.dart';
 
 void main() {
-  CountDataLogic target = CountDataLogic();
+  CountDataService target = CountDataService();
 
   setUp(() async {
-    target = CountDataLogic();
+    target = CountDataService();
   });
 
   test('init', () async {

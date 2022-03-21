@@ -1,6 +1,6 @@
 import 'package:riverpod_countup/model/count_data/count_data.dart';
 
-class CountDataLogic {
+class CountDataService {
   CountData _countData = const CountData(count: 0, countUp: 0, countDown: 0);
 
   get countData => _countData;

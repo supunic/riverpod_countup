@@ -1,18 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/count_data/count_data.dart';
-import 'package:riverpod_countup/logic/count_data_logic.dart';
-import 'package:riverpod_countup/logic/sound_logic.dart';
+import 'package:riverpod_countup/service/count_data_service.dart';
+import 'package:riverpod_countup/service/sound_service.dart';
 import 'package:riverpod_countup/state/provider.dart';
 
 class HomeViewModel {
-  final CountDataLogic _countDataLogic = CountDataLogic();
-  final SoundLogic _soundLogic = SoundLogic();
+  final CountDataService _countDataService = CountDataService();
+  final SoundService _soundService = SoundService();
 
   late WidgetRef _ref;
 
   void setRef(WidgetRef ref) {
     _ref = ref;
-    _soundLogic.load();
+    _soundService.load();
   }
 
   get count => _ref.watch(countDataProvider).count.toString();
@@ -25,17 +25,17 @@ class HomeViewModel {
       .toString();
 
   void onIncrease() {
-    _countDataLogic.increase();
+    _countDataService.increase();
     _update();
   }
 
   void onDecrease() {
-    _countDataLogic.decrease();
+    _countDataService.decrease();
     _update();
   }
 
   void onReset() {
-    _countDataLogic.reset();
+    _countDataService.reset();
     _update();
   }
 
@@ -43,8 +43,8 @@ class HomeViewModel {
     CountData oldData = _ref.watch(countDataProvider);
     _ref
         .watch(countDataProvider.state)
-        .update((state) => _countDataLogic.countData);
+        .update((state) => _countDataService.countData);
     CountData newData = _ref.watch(countDataProvider);
-    _soundLogic.valueChanged(oldData, newData);
+    _soundService.valueChanged(oldData, newData);
   }
 }
