@@ -4,6 +4,10 @@ import 'package:flutter/foundation.dart';
 part 'postal_code.freezed.dart';
 part 'postal_code.g.dart';
 
+abstract class PostalCodeRepository {
+  Future<PostalCode> search(String postalCode);
+}
+
 @freezed
 class PostalCode with _$PostalCode {
   const factory PostalCode({
