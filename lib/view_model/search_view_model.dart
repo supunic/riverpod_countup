@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_countup/model/postal_code/postal_code.dart';
+import 'package:riverpod_countup/provider/model/postal_code_provider.dart';
 import 'package:riverpod_countup/service/postal_code_service.dart';
-
-import '../model/postal_code/postal_code.dart';
-import '../provider/model/postal_code_provider.dart';
 
 class SearchViewModel {
   final PostalCodeService _postalCodeService = PostalCodeService();
@@ -34,27 +33,26 @@ class SearchViewModel {
           .update((state) => _postalCodeService.postalCode);
     } catch (ex) {}
   }
+}
 
-  Future<PostalCode> onPostalCodeChange(
-      FutureProviderRef<PostalCode> ref) async {
-    final _newPostalCode = ref.watch(postalCodeProvider);
-    final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
+Future<PostalCode> onPostalCodeChange(FutureProviderRef<PostalCode> ref) async {
+  final _newPostalCode = ref.watch(postalCodeProvider);
+  final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
-    if (_newPostalCode.code.length != 7) {
-      throw Exception("Postal Code must be 7 characters");
-    }
-
-    return await _postalCodeRepository.search(_newPostalCode.code);
+  if (_newPostalCode.code.length != 7) {
+    throw Exception("Postal Code must be 7 characters");
   }
 
-  Future<PostalCode> onPostalCodeChangeByFamily(
-      AutoDisposeFutureProviderRef<PostalCode> ref, String postalCode) async {
-    final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
+  return await _postalCodeRepository.search(_newPostalCode.code);
+}
 
-    if (postalCode.length != 7) {
-      throw Exception("Postal Code must be 7 characters");
-    }
+Future<PostalCode> onPostalCodeChangeByFamily(
+    AutoDisposeFutureProviderRef<PostalCode> ref, String postalCode) async {
+  final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
-    return await _postalCodeRepository.search(postalCode);
+  if (postalCode.length != 7) {
+    throw Exception("Postal Code must be 7 characters");
   }
+
+  return await _postalCodeRepository.search(postalCode);
 }
