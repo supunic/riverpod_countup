@@ -34,11 +34,11 @@ class _SearchViewState extends ConsumerState<SearchView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextField(
-                onChanged: (text) => _searchViewModel.onPostalCodeChanged(text),
+                onChanged: (text) => _searchViewModel.onChange(text),
               ),
               const Text('without family'),
               Expanded(
-                child: _searchViewModel.postalCode.when(
+                child: _searchViewModel.postalCodeFuture.when(
                   data: (data) => ListView.separated(
                     itemCount: data.data.length,
                     itemBuilder: (context, index) => ListTile(
@@ -66,7 +66,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
               ),
               const Text('with family'),
               Expanded(
-                child: _searchViewModel.familyPostalCode.when(
+                child: _searchViewModel.postalCodeFutureFamily.when(
                   data: (data) => ListView.separated(
                     itemCount: data.data.length,
                     itemBuilder: (context, index) => ListTile(
