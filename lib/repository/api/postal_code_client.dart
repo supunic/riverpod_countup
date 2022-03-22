@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
-class PostalCodeClient {
-  Future<http.Response> search(String postalCode) async {
+import '../../model/postal_code/postal_code.dart';
+import '../../model/postal_code/postal_code_repository.dart';
+
+class PostalCodeClient implements PostalCodeRepository {
+  @override
+  Future<PostalCode> search(String postalCode) async {
     final upper = postalCode.substring(0, 3);
     final lower = postalCode.substring(3);
     final apiUrl =
@@ -13,6 +19,7 @@ class PostalCodeClient {
       throw Exception('No postal code: $postalCode');
     }
 
-    return response;
+    var jsonData = json.decode(response.body);
+    return PostalCode.fromJson(jsonData);
   }
 }

@@ -46,9 +46,7 @@ class SearchViewModel {
     if (newPostalCode.code.length != 7) {
       throw Exception("Postal Code must be 7 characters");
     }
-    var response = await _postalCodeClient.search(newPostalCode.code);
-    var jsonData = json.decode(response.body);
-    return PostalCode.fromJson(jsonData);
+    return await _postalCodeClient.search(newPostalCode.code);
   }
 
   Future<PostalCode> onPostalCodeChangeByFamily(
@@ -56,8 +54,6 @@ class SearchViewModel {
     if (postalCode.length != 7) {
       throw Exception("Postal Code must be 7 characters");
     }
-    var response = await _postalCodeClient.search(postalCode);
-    var jsonData = json.decode(response.body);
-    return PostalCode.fromJson(jsonData);
+    return await _postalCodeClient.search(postalCode);
   }
 }
