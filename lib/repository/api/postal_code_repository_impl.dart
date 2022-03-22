@@ -12,7 +12,8 @@ class PostalCodeRepositoryImpl implements PostalCodeRepository {
   @override
   Future<PostalCode> search(String postalCode) async {
     final responseBody = await _postalCodeClient.search(postalCode);
-    var jsonData = json.decode(responseBody);
+    final jsonData = json.decode(responseBody);
+
     return PostalCode.fromJson(jsonData);
   }
 }
