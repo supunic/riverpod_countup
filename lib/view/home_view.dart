@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/provider/view/home_provider.dart';
+import 'package:riverpod_countup/view/search_view.dart';
 import 'package:riverpod_countup/view_model/home_view_model.dart';
 
 // ConsumerStatefulWidget
@@ -22,6 +23,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     super.initState();
 
     _homeViewModel.setRef(ref);
+    _homeViewModel.initSound();
   }
 
   @override
@@ -44,25 +46,33 @@ class _HomeViewState extends ConsumerState<HomeView> {
               _homeViewModel.count,
               style: Theme.of(context).textTheme.headline4,
             ),
+            const Padding(padding: EdgeInsets.only(bottom: 80.0)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
-                  // ref.watch -> ref.read にすると、button の rebuild がされなくなる
                     onPressed: _homeViewModel.onIncrease,
+                    heroTag: 'Increment',
                     tooltip: 'Increment',
                     child: const Icon(CupertinoIcons.plus)),
                 FloatingActionButton(
-                  // ref.watch -> ref.read にすると、button の rebuild がされなくなる
+                    onPressed: _homeViewModel.onReset,
+                    heroTag: 'Refresh',
+                    tooltip: 'Refresh',
+                    child: const Icon(Icons.refresh)),
+                FloatingActionButton(
                     onPressed: _homeViewModel.onDecrease,
+                    heroTag: 'Decrement',
                     tooltip: 'Decrement',
-                    child: const Icon(CupertinoIcons.minus))
+                    child: const Icon(CupertinoIcons.minus)),
               ],
             ),
+            const Padding(padding: EdgeInsets.only(bottom: 8.0)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(_homeViewModel.countUp),
+                const Text(' '),
                 Text(_homeViewModel.countDown),
               ],
             ),
@@ -70,9 +80,14 @@ class _HomeViewState extends ConsumerState<HomeView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _homeViewModel.onReset,
-        tooltip: 'Refresh',
-        child: const Icon(Icons.refresh),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const SearchView()));
+        },
+        heroTag: 'Search',
+        tooltip: 'Search',
+        backgroundColor: Colors.grey,
+        child: const Icon(Icons.search),
       ),
     );
   }

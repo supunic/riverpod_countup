@@ -12,6 +12,9 @@ class HomeViewModel {
 
   void setRef(WidgetRef ref) {
     _ref = ref;
+  }
+
+  void initSound() {
     _soundService.load();
   }
 
