@@ -18,12 +18,12 @@ class HomeViewModel {
     _soundService.load();
   }
 
-  get count => _ref.watch(countDataProvider).count.toString();
+  String get count => _ref.watch(countDataProvider).count.toString();
 
-  get countUp =>
+  String get countUp =>
       _ref.watch(countDataProvider.select((value) => value.countUp)).toString();
 
-  get countDown => _ref
+  String get countDown => _ref
       .watch(countDataProvider.select((value) => value.countDown))
       .toString();
 
