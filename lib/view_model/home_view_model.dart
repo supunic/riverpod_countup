@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/count_data/count_data.dart';
+import 'package:riverpod_countup/provider/model/count_data_provider.dart';
 import 'package:riverpod_countup/service/count_data_service.dart';
 import 'package:riverpod_countup/service/sound_service.dart';
-import 'package:riverpod_countup/provider/model/count_data_provider.dart';
 
 class HomeViewModel {
   final CountDataService _countDataService = CountDataService();

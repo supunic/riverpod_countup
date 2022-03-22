@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../view_model/search_view_model.dart';
+import 'package:riverpod_countup/view_model/search_view_model.dart';
 
 class SearchView extends ConsumerStatefulWidget {
   const SearchView({Key? key}) : super(key: key);
