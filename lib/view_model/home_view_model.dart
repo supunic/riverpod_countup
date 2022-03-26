@@ -37,9 +37,9 @@ class HomeViewModel {
   }
 
   void _withSound(void Function() update) {
-    final oldData = _ref.watch(countDataProvider);
+    final oldData = _ref.read(countDataProvider);
     update();
-    final newData = _ref.watch(countDataProvider);
+    final newData = _ref.read(countDataProvider);
     _soundService.valueChanged(oldData, newData);
   }
 }
