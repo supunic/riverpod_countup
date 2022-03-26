@@ -3,18 +3,15 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/postal_code/postal_code.dart';
 import 'package:riverpod_countup/provider/model/postal_code_provider.dart';
-import 'package:riverpod_countup/service/postal_code_service.dart';
 
 class SearchViewModel {
-  final PostalCodeService _postalCodeService = PostalCodeService();
-
   late final WidgetRef _ref;
 
   void setRef(WidgetRef ref) {
     _ref = ref;
   }
 
-  PostalCode get _postalCode => _ref.watch(postalCodeProvider);
+  PostalCode get _postalCode => _ref.watch(postalCodeNotifierProvider);
 
   AsyncValue<PostalCode> get postalCodeFuture =>
       _ref.watch(postalCodeFutureProvider);
@@ -29,16 +26,13 @@ class SearchViewModel {
 
     try {
       int.parse(text);
-      _postalCodeService.updateCode(text);
-      _ref
-          .read(postalCodeProvider.notifier)
-          .update((state) => _postalCodeService.postalCode);
+      _ref.read(postalCodeNotifierProvider.notifier).updateCode(text);
     } catch (ex) {}
   }
 }
 
 Future<PostalCode> onPostalCodeChange(FutureProviderRef<PostalCode> ref) async {
-  final _newPostalCode = ref.watch(postalCodeProvider);
+  final _newPostalCode = ref.watch(postalCodeNotifierProvider);
   final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
   if (_newPostalCode.code.length != 7) {
