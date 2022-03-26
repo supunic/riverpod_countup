@@ -15,31 +15,32 @@ class HomeViewModel {
     _soundService.load();
   }
 
-  String get count => _ref.watch(countDataProvider).count.toString();
+  String get count => _ref.watch(countDataNotifierProvider).count.toString();
 
-  String get countUp =>
-      _ref.watch(countDataProvider.select((value) => value.countUp)).toString();
+  String get countUp => _ref
+      .watch(countDataNotifierProvider.select((value) => value.countUp))
+      .toString();
 
   String get countDown => _ref
-      .watch(countDataProvider.select((value) => value.countDown))
+      .watch(countDataNotifierProvider.select((value) => value.countDown))
       .toString();
 
   void onIncrease() {
-    _withSound(_ref.read(countDataProvider.notifier).increase);
+    _withSound(_ref.read(countDataNotifierProvider.notifier).increase);
   }
 
   void onDecrease() {
-    _withSound(_ref.read(countDataProvider.notifier).decrease);
+    _withSound(_ref.read(countDataNotifierProvider.notifier).decrease);
   }
 
   void onReset() {
-    _withSound(_ref.read(countDataProvider.notifier).reset);
+    _withSound(_ref.read(countDataNotifierProvider.notifier).reset);
   }
 
   void _withSound(void Function() update) {
-    final oldData = _ref.read(countDataProvider);
+    final oldData = _ref.read(countDataNotifierProvider);
     update();
-    final newData = _ref.read(countDataProvider);
+    final newData = _ref.read(countDataNotifierProvider);
     _soundService.valueChanged(oldData, newData);
   }
 }
