@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/count_data/count_data.dart';
+import 'package:riverpod_countup/notifier/count_data_notifier.dart';
 
-final countDataProvider = StateProvider<CountData>(
-    (ref) => const CountData(count: 0, countUp: 0, countDown: 0));
+final countDataProvider = StateNotifierProvider<CountDataNotifier, CountData>(
+    (ref) => CountDataNotifier());
