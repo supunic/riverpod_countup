@@ -43,7 +43,7 @@ Future<PostalCode> onPostalCodeChange(FutureProviderRef<PostalCode> ref) async {
 }
 
 FutureOr<PostalCode> onPostalCodeChangeByFamily(
-    FutureProviderRef<PostalCode> ref, PostalCode postalCode) async {
+    AutoDisposeFutureProviderRef<PostalCode> ref, PostalCode postalCode) async {
   final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
   if (postalCode.code.length != 7) {

@@ -12,7 +12,8 @@ final postalCodeNotifierProvider =
 final postalCodeFutureProvider = FutureProvider<PostalCode>(onPostalCodeChange);
 
 final postalCodeFutureFamilyProvider =
-    FutureProviderFamily<PostalCode, PostalCode>(onPostalCodeChangeByFamily);
+    AutoDisposeFutureProviderFamily<PostalCode, PostalCode>(
+        onPostalCodeChangeByFamily);
 
 final postalCodeClientProvider =
     Provider<PostalCodeClient>((_) => PostalCodeClientImpl());
