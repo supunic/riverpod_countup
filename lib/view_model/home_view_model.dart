@@ -8,7 +8,7 @@ class HomeViewModel {
   final CountDataService _countDataService = CountDataService();
   final SoundService _soundService = SoundService();
 
-  late WidgetRef _ref;
+  late final WidgetRef _ref;
 
   void setRef(WidgetRef ref) {
     _ref = ref;
@@ -45,7 +45,7 @@ class HomeViewModel {
   void _update() {
     CountData oldData = _ref.watch(countDataProvider);
     _ref
-        .watch(countDataProvider.state)
+        .read(countDataProvider.notifier)
         .update((state) => _countDataService.countData);
     CountData newData = _ref.watch(countDataProvider);
     _soundService.valueChanged(oldData, newData);
