@@ -8,11 +8,9 @@ class PostalCodeNotifier extends StateNotifier<PostalCode> {
 
   PostalCode get postalCode => state;
 
+  void reset() => state = _initPostalCode();
+
   void updateCode(String code) {
     state = state.copyWith(code: code);
-  }
-
-  void reset() {
-    state = _initPostalCode();
   }
 }
