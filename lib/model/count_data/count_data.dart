@@ -1,7 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'count_data.freezed.dart';
+
 part 'count_data.g.dart';
 
 // コード生成
@@ -20,4 +21,6 @@ class CountData with _$CountData {
 
   factory CountData.fromJson(Map<String, dynamic> json) =>
       _$CountDataFromJson(json);
+
+  static empty() => const CountData(count: 0, countUp: 0, countDown: 0);
 }

@@ -1,15 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/count_data/count_data.dart';
 
-CountData _initCountData() =>
-    const CountData(count: 0, countUp: 0, countDown: 0);
-
 class CountDataNotifier extends StateNotifier<CountData> {
-  CountDataNotifier() : super(_initCountData());
+  CountDataNotifier() : super(CountData.empty());
 
   CountData get countData => state;
 
-  void reset() => state = _initCountData();
+  void reset() => state = CountData.empty();
 
   void increase() {
     state = state.copyWith(
