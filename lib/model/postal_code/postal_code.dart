@@ -1,7 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'postal_code.freezed.dart';
+
 part 'postal_code.g.dart';
 
 abstract class PostalCodeRepository {
@@ -10,8 +11,13 @@ abstract class PostalCodeRepository {
 
 @freezed
 class PostalCode with _$PostalCode {
+  static const int codeLength = 7;
+
+  @Assert('code.length == $codeLength', '郵便番号は$codeLength桁にしてください')
   const factory PostalCode({
     required String code,
+    @Default('') String upper, // 入力時のみ
+    @Default('') String lower, // 入力時のみ
     required List<PostalCodeData> data,
   }) = _PostalCode;
 

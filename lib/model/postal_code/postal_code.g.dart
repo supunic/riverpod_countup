@@ -9,6 +9,8 @@ part of 'postal_code.dart';
 _$_PostalCode _$$_PostalCodeFromJson(Map<String, dynamic> json) =>
     _$_PostalCode(
       code: json['code'] as String,
+      upper: json['upper'] as String? ?? '',
+      lower: json['lower'] as String? ?? '',
       data: (json['data'] as List<dynamic>)
           .map((e) => PostalCodeData.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -17,6 +19,8 @@ _$_PostalCode _$$_PostalCodeFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_PostalCodeToJson(_$_PostalCode instance) =>
     <String, dynamic>{
       'code': instance.code,
+      'upper': instance.upper,
+      'lower': instance.lower,
       'data': instance.data,
     };
 
