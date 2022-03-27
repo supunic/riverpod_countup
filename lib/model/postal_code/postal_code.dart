@@ -18,6 +18,8 @@ class PostalCode with _$PostalCode {
 
   factory PostalCode.fromJson(Map<String, dynamic> json) =>
       _$PostalCodeFromJson(json);
+
+  static empty() => const PostalCode(code: '', data: []);
 }
 
 @freezed
@@ -48,8 +50,6 @@ class PostalCodeAddress with _$PostalCodeAddress {
 
 @freezed
 class PostalCodeInput with _$PostalCodeInput {
-  static const int codeLength = 7;
-
   @Assert('code.length == $codeLength', '郵便番号は$codeLength桁にしてください')
   const factory PostalCodeInput({
     @Default('0000000') String code,
@@ -57,4 +57,8 @@ class PostalCodeInput with _$PostalCodeInput {
     @Default('') String lower,
     @Default('') String path,
   }) = _PostalCodeInput;
+
+  static const int codeLength = 7;
+
+  static empty() => const PostalCodeInput();
 }
