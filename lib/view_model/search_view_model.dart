@@ -11,36 +11,41 @@ class SearchViewModel {
     _ref = ref;
   }
 
-  PostalCode get _postalCode => _ref.watch(postalCodeNotifierProvider);
+  PostalCodeInput get _postalCodeInput =>
+      _ref.watch(postalCodeInputNotifierProvider);
 
   AsyncValue<PostalCode> get postalCodeFuture =>
       _ref.watch(postalCodeFutureProvider);
 
   AsyncValue<PostalCode> get postalCodeFutureFamily =>
-      _ref.watch(postalCodeFutureFamilyProvider(_postalCode));
+      _ref.watch(postalCodeFutureFamilyProvider(_postalCodeInput));
 
   void onChange(String text) {
-    if (text.length != PostalCode.codeLength) return;
+    if (text.length != PostalCodeInput.codeLength) return;
 
     try {
-      int.parse(text); // 数字であるか確認
-      _ref.read(postalCodeNotifierProvider.notifier).updateCode(text);
+      int.parse(text);
+      _ref.read(postalCodeInputNotifierProvider.notifier).update(text);
     } catch (ex) {
       print(ex);
     }
   }
 }
 
-Future<PostalCode> onPostalCodeChange(FutureProviderRef<PostalCode> ref) async {
-  final _newPostalCode = ref.watch(postalCodeNotifierProvider);
+Future<PostalCode> onPostalCodeInputChange(
+    FutureProviderRef<PostalCode> ref) async {
+  // watch した provider の変更を検知する
+  final _postalCodeInput = ref.watch(postalCodeInputNotifierProvider);
   final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
-  return await _postalCodeRepository.search(_newPostalCode);
+  return await _postalCodeRepository.search(_postalCodeInput);
 }
 
-FutureOr<PostalCode> onPostalCodeChangeByFamily(
-    AutoDisposeFutureProviderRef<PostalCode> ref, PostalCode postalCode) async {
+FutureOr<PostalCode> onPostalCodeInputChangeByFamily(
+    AutoDisposeFutureProviderRef<PostalCode> ref,
+    PostalCodeInput postalCodeInput) async {
+  // 引数で渡した値の変更を検知する
   final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
-  return await _postalCodeRepository.search(postalCode);
+  return await _postalCodeRepository.search(postalCodeInput);
 }

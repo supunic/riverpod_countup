@@ -6,18 +6,13 @@ part 'postal_code.freezed.dart';
 part 'postal_code.g.dart';
 
 abstract class PostalCodeRepository {
-  Future<PostalCode> search(PostalCode postalCode);
+  Future<PostalCode> search(PostalCodeInput postalCodeInput);
 }
 
 @freezed
 class PostalCode with _$PostalCode {
-  static const int codeLength = 7;
-
-  @Assert('code.length == $codeLength', '郵便番号は$codeLength桁にしてください')
   const factory PostalCode({
     required String code,
-    @Default('') String upper, // 入力時のみ
-    @Default('') String lower, // 入力時のみ
     required List<PostalCodeData> data,
   }) = _PostalCode;
 
@@ -49,4 +44,17 @@ class PostalCodeAddress with _$PostalCodeAddress {
 
   factory PostalCodeAddress.fromJson(Map<String, dynamic> json) =>
       _$PostalCodeAddressFromJson(json);
+}
+
+@freezed
+class PostalCodeInput with _$PostalCodeInput {
+  static const int codeLength = 7;
+
+  @Assert('code.length == $codeLength', '郵便番号は$codeLength桁にしてください')
+  const factory PostalCodeInput({
+    @Default('0000000') String code,
+    @Default('') String upper,
+    @Default('') String lower,
+    @Default('') String path,
+  }) = _PostalCodeInput;
 }

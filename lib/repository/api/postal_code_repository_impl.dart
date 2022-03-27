@@ -9,8 +9,8 @@ class PostalCodeRepositoryImpl implements PostalCodeRepository {
   final PostalCodeClient _postalCodeClient;
 
   @override
-  Future<PostalCode> search(PostalCode postalCode) async {
-    final responseBody = await _postalCodeClient.search(postalCode);
+  Future<PostalCode> search(PostalCodeInput postalCodeInput) async {
+    final responseBody = await _postalCodeClient.search(postalCodeInput);
     final jsonData = json.decode(responseBody);
 
     return PostalCode.fromJson(jsonData);

@@ -21,15 +21,9 @@ PostalCode _$PostalCodeFromJson(Map<String, dynamic> json) {
 class _$PostalCodeTearOff {
   const _$PostalCodeTearOff();
 
-  _PostalCode call(
-      {required String code,
-      String upper = '',
-      String lower = '',
-      required List<PostalCodeData> data}) {
+  _PostalCode call({required String code, required List<PostalCodeData> data}) {
     return _PostalCode(
       code: code,
-      upper: upper,
-      lower: lower,
       data: data,
     );
   }
@@ -45,8 +39,6 @@ const $PostalCode = _$PostalCodeTearOff();
 /// @nodoc
 mixin _$PostalCode {
   String get code => throw _privateConstructorUsedError;
-  String get upper => throw _privateConstructorUsedError; // 入力時のみ
-  String get lower => throw _privateConstructorUsedError; // 入力時のみ
   List<PostalCodeData> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,8 +52,7 @@ abstract class $PostalCodeCopyWith<$Res> {
   factory $PostalCodeCopyWith(
           PostalCode value, $Res Function(PostalCode) then) =
       _$PostalCodeCopyWithImpl<$Res>;
-  $Res call(
-      {String code, String upper, String lower, List<PostalCodeData> data});
+  $Res call({String code, List<PostalCodeData> data});
 }
 
 /// @nodoc
@@ -75,22 +66,12 @@ class _$PostalCodeCopyWithImpl<$Res> implements $PostalCodeCopyWith<$Res> {
   @override
   $Res call({
     Object? code = freezed,
-    Object? upper = freezed,
-    Object? lower = freezed,
     Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String,
-      upper: upper == freezed
-          ? _value.upper
-          : upper // ignore: cast_nullable_to_non_nullable
-              as String,
-      lower: lower == freezed
-          ? _value.lower
-          : lower // ignore: cast_nullable_to_non_nullable
               as String,
       data: data == freezed
           ? _value.data
@@ -106,8 +87,7 @@ abstract class _$PostalCodeCopyWith<$Res> implements $PostalCodeCopyWith<$Res> {
           _PostalCode value, $Res Function(_PostalCode) then) =
       __$PostalCodeCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String code, String upper, String lower, List<PostalCodeData> data});
+  $Res call({String code, List<PostalCodeData> data});
 }
 
 /// @nodoc
@@ -123,22 +103,12 @@ class __$PostalCodeCopyWithImpl<$Res> extends _$PostalCodeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? code = freezed,
-    Object? upper = freezed,
-    Object? lower = freezed,
     Object? data = freezed,
   }) {
     return _then(_PostalCode(
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as String,
-      upper: upper == freezed
-          ? _value.upper
-          : upper // ignore: cast_nullable_to_non_nullable
-              as String,
-      lower: lower == freezed
-          ? _value.lower
-          : lower // ignore: cast_nullable_to_non_nullable
               as String,
       data: data == freezed
           ? _value.data
@@ -151,30 +121,19 @@ class __$PostalCodeCopyWithImpl<$Res> extends _$PostalCodeCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PostalCode with DiagnosticableTreeMixin implements _PostalCode {
-  const _$_PostalCode(
-      {required this.code,
-      this.upper = '',
-      this.lower = '',
-      required this.data})
-      : assert(code.length == 7, '郵便番号は7桁にしてください');
+  const _$_PostalCode({required this.code, required this.data});
 
   factory _$_PostalCode.fromJson(Map<String, dynamic> json) =>
       _$$_PostalCodeFromJson(json);
 
   @override
   final String code;
-  @JsonKey()
   @override
-  final String upper;
-  @JsonKey()
-  @override // 入力時のみ
-  final String lower;
-  @override // 入力時のみ
   final List<PostalCodeData> data;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostalCode(code: $code, upper: $upper, lower: $lower, data: $data)';
+    return 'PostalCode(code: $code, data: $data)';
   }
 
   @override
@@ -183,8 +142,6 @@ class _$_PostalCode with DiagnosticableTreeMixin implements _PostalCode {
     properties
       ..add(DiagnosticsProperty('type', 'PostalCode'))
       ..add(DiagnosticsProperty('code', code))
-      ..add(DiagnosticsProperty('upper', upper))
-      ..add(DiagnosticsProperty('lower', lower))
       ..add(DiagnosticsProperty('data', data));
   }
 
@@ -194,8 +151,6 @@ class _$_PostalCode with DiagnosticableTreeMixin implements _PostalCode {
         (other.runtimeType == runtimeType &&
             other is _PostalCode &&
             const DeepCollectionEquality().equals(other.code, code) &&
-            const DeepCollectionEquality().equals(other.upper, upper) &&
-            const DeepCollectionEquality().equals(other.lower, lower) &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
@@ -203,8 +158,6 @@ class _$_PostalCode with DiagnosticableTreeMixin implements _PostalCode {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(upper),
-      const DeepCollectionEquality().hash(lower),
       const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
@@ -221,8 +174,6 @@ class _$_PostalCode with DiagnosticableTreeMixin implements _PostalCode {
 abstract class _PostalCode implements PostalCode {
   const factory _PostalCode(
       {required String code,
-      String upper,
-      String lower,
       required List<PostalCodeData> data}) = _$_PostalCode;
 
   factory _PostalCode.fromJson(Map<String, dynamic> json) =
@@ -231,10 +182,6 @@ abstract class _PostalCode implements PostalCode {
   @override
   String get code;
   @override
-  String get upper;
-  @override // 入力時のみ
-  String get lower;
-  @override // 入力時のみ
   List<PostalCodeData> get data;
   @override
   @JsonKey(ignore: true)
@@ -728,5 +675,216 @@ abstract class _PostalCodeAddress implements PostalCodeAddress {
   @override
   @JsonKey(ignore: true)
   _$PostalCodeAddressCopyWith<_PostalCodeAddress> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$PostalCodeInputTearOff {
+  const _$PostalCodeInputTearOff();
+
+  _PostalCodeInput call(
+      {String code = '0000000',
+      String upper = '',
+      String lower = '',
+      String path = ''}) {
+    return _PostalCodeInput(
+      code: code,
+      upper: upper,
+      lower: lower,
+      path: path,
+    );
+  }
+}
+
+/// @nodoc
+const $PostalCodeInput = _$PostalCodeInputTearOff();
+
+/// @nodoc
+mixin _$PostalCodeInput {
+  String get code => throw _privateConstructorUsedError;
+  String get upper => throw _privateConstructorUsedError;
+  String get lower => throw _privateConstructorUsedError;
+  String get path => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PostalCodeInputCopyWith<PostalCodeInput> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PostalCodeInputCopyWith<$Res> {
+  factory $PostalCodeInputCopyWith(
+          PostalCodeInput value, $Res Function(PostalCodeInput) then) =
+      _$PostalCodeInputCopyWithImpl<$Res>;
+  $Res call({String code, String upper, String lower, String path});
+}
+
+/// @nodoc
+class _$PostalCodeInputCopyWithImpl<$Res>
+    implements $PostalCodeInputCopyWith<$Res> {
+  _$PostalCodeInputCopyWithImpl(this._value, this._then);
+
+  final PostalCodeInput _value;
+  // ignore: unused_field
+  final $Res Function(PostalCodeInput) _then;
+
+  @override
+  $Res call({
+    Object? code = freezed,
+    Object? upper = freezed,
+    Object? lower = freezed,
+    Object? path = freezed,
+  }) {
+    return _then(_value.copyWith(
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      upper: upper == freezed
+          ? _value.upper
+          : upper // ignore: cast_nullable_to_non_nullable
+              as String,
+      lower: lower == freezed
+          ? _value.lower
+          : lower // ignore: cast_nullable_to_non_nullable
+              as String,
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$PostalCodeInputCopyWith<$Res>
+    implements $PostalCodeInputCopyWith<$Res> {
+  factory _$PostalCodeInputCopyWith(
+          _PostalCodeInput value, $Res Function(_PostalCodeInput) then) =
+      __$PostalCodeInputCopyWithImpl<$Res>;
+  @override
+  $Res call({String code, String upper, String lower, String path});
+}
+
+/// @nodoc
+class __$PostalCodeInputCopyWithImpl<$Res>
+    extends _$PostalCodeInputCopyWithImpl<$Res>
+    implements _$PostalCodeInputCopyWith<$Res> {
+  __$PostalCodeInputCopyWithImpl(
+      _PostalCodeInput _value, $Res Function(_PostalCodeInput) _then)
+      : super(_value, (v) => _then(v as _PostalCodeInput));
+
+  @override
+  _PostalCodeInput get _value => super._value as _PostalCodeInput;
+
+  @override
+  $Res call({
+    Object? code = freezed,
+    Object? upper = freezed,
+    Object? lower = freezed,
+    Object? path = freezed,
+  }) {
+    return _then(_PostalCodeInput(
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      upper: upper == freezed
+          ? _value.upper
+          : upper // ignore: cast_nullable_to_non_nullable
+              as String,
+      lower: lower == freezed
+          ? _value.lower
+          : lower // ignore: cast_nullable_to_non_nullable
+              as String,
+      path: path == freezed
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PostalCodeInput
+    with DiagnosticableTreeMixin
+    implements _PostalCodeInput {
+  const _$_PostalCodeInput(
+      {this.code = '0000000', this.upper = '', this.lower = '', this.path = ''})
+      : assert(code.length == 7, '郵便番号は7桁にしてください');
+
+  @JsonKey()
+  @override
+  final String code;
+  @JsonKey()
+  @override
+  final String upper;
+  @JsonKey()
+  @override
+  final String lower;
+  @JsonKey()
+  @override
+  final String path;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PostalCodeInput(code: $code, upper: $upper, lower: $lower, path: $path)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PostalCodeInput'))
+      ..add(DiagnosticsProperty('code', code))
+      ..add(DiagnosticsProperty('upper', upper))
+      ..add(DiagnosticsProperty('lower', lower))
+      ..add(DiagnosticsProperty('path', path));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _PostalCodeInput &&
+            const DeepCollectionEquality().equals(other.code, code) &&
+            const DeepCollectionEquality().equals(other.upper, upper) &&
+            const DeepCollectionEquality().equals(other.lower, lower) &&
+            const DeepCollectionEquality().equals(other.path, path));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(code),
+      const DeepCollectionEquality().hash(upper),
+      const DeepCollectionEquality().hash(lower),
+      const DeepCollectionEquality().hash(path));
+
+  @JsonKey(ignore: true)
+  @override
+  _$PostalCodeInputCopyWith<_PostalCodeInput> get copyWith =>
+      __$PostalCodeInputCopyWithImpl<_PostalCodeInput>(this, _$identity);
+}
+
+abstract class _PostalCodeInput implements PostalCodeInput {
+  const factory _PostalCodeInput(
+      {String code,
+      String upper,
+      String lower,
+      String path}) = _$_PostalCodeInput;
+
+  @override
+  String get code;
+  @override
+  String get upper;
+  @override
+  String get lower;
+  @override
+  String get path;
+  @override
+  @JsonKey(ignore: true)
+  _$PostalCodeInputCopyWith<_PostalCodeInput> get copyWith =>
       throw _privateConstructorUsedError;
 }
