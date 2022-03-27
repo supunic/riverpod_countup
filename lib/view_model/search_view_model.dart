@@ -20,14 +20,14 @@ class SearchViewModel {
       _ref.watch(postalCodeFutureFamilyProvider(_postalCode));
 
   void onChange(String text) {
-    if (text.length != 7) {
-      return;
-    }
+    if (text.length != PostalCode.codeLength) return;
 
     try {
-      int.parse(text);
+      int.parse(text); // 数字であるか確認
       _ref.read(postalCodeNotifierProvider.notifier).updateCode(text);
-    } catch (ex) {}
+    } catch (ex) {
+      print(ex);
+    }
   }
 }
 
@@ -35,20 +35,12 @@ Future<PostalCode> onPostalCodeChange(FutureProviderRef<PostalCode> ref) async {
   final _newPostalCode = ref.watch(postalCodeNotifierProvider);
   final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
 
-  if (_newPostalCode.code.length != 7) {
-    throw Exception("Postal Code must be 7 characters");
-  }
-
   return await _postalCodeRepository.search(_newPostalCode);
 }
 
 FutureOr<PostalCode> onPostalCodeChangeByFamily(
     AutoDisposeFutureProviderRef<PostalCode> ref, PostalCode postalCode) async {
   final _postalCodeRepository = ref.read(postalCodeRepositoryProvider);
-
-  if (postalCode.code.length != 7) {
-    throw Exception("Postal Code must be 7 characters");
-  }
 
   return await _postalCodeRepository.search(postalCode);
 }
