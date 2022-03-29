@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_countup/view/timestamp_view.dart';
 import 'package:riverpod_countup/view_model/search_view_model.dart';
 
 class SearchView extends ConsumerStatefulWidget {
@@ -94,6 +95,16 @@ class _SearchViewState extends ConsumerState<SearchView> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TimestampView()));
+        },
+        heroTag: 'Timestamp',
+        tooltip: 'Timestamp',
+        backgroundColor: Colors.grey,
+        child: const Icon(Icons.timer),
       ),
     );
   }
