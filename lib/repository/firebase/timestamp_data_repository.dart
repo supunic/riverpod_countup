@@ -4,6 +4,15 @@ import 'package:riverpod_countup/model/timestamp_data/timestamp_data.dart';
 class TimestampDataRepositoryImpl implements TimestampDataRepository {
   static const collectionName = 'collection_count';
 
+  static final TimestampDataRepositoryImpl _cache =
+      TimestampDataRepositoryImpl._internal();
+
+  TimestampDataRepositoryImpl._internal();
+
+  factory TimestampDataRepositoryImpl() {
+    return _cache;
+  }
+
   final _collection = FirebaseFirestore.instance.collection(collectionName);
 
   @override
