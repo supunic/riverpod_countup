@@ -2,11 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/timestamp_data/timestamp_data.dart';
 import 'package:riverpod_countup/provider/model/timestamp_data_provider.dart';
 
-// import 'package:riverpod_countup/repository/firebase/timestamp_data_repository.dart';
-//
-// final TimestampDataRepository _timestampDataRepository =
-//     TimestampDataRepository();
-
 class TimestampViewModel {
   late final WidgetRef _ref;
   int _counter = 0;
@@ -37,7 +32,7 @@ Stream<List<TimestampData>> onTimestampDataChange(
 
 TimestampData _convert(Object? obj) {
   if (obj == null) {
-    return TimestampData(dateTime: DateTime.now(), count: -1);
+    return TimestampData.empty();
   }
 
   var map = obj as Map<String, dynamic>;

@@ -21,4 +21,6 @@ class TimestampData with _$TimestampData {
 
   factory TimestampData.fromJson(Map<String, dynamic> json) =>
       _$TimestampDataFromJson(json);
+
+  static empty() => TimestampData(dateTime: DateTime.now(), count: -1);
 }
