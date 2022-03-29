@@ -1,10 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_countup/model/timestamp_data/timestamp_data.dart';
 import 'package:riverpod_countup/provider/model/timestamp_data_provider.dart';
-import 'package:riverpod_countup/repository/firebase/timestamp_data_repository.dart';
 
-final TimestampDataRepository _timestampDataRepository =
-    TimestampDataRepository();
+// import 'package:riverpod_countup/repository/firebase/timestamp_data_repository.dart';
+//
+// final TimestampDataRepository _timestampDataRepository =
+//     TimestampDataRepository();
 
 class TimestampViewModel {
   late final WidgetRef _ref;
@@ -22,13 +23,14 @@ class TimestampViewModel {
       dateTime: DateTime.now(),
       count: _counter++,
     );
-    _timestampDataRepository.saveCountData(countData);
+    _ref.read(timestampDataRepositoryProvider).saveCountData(countData);
   }
 }
 
 Stream<List<TimestampData>> onTimestampDataChange(
     StreamProviderRef<List<TimestampData>> ref) {
-  return _timestampDataRepository
+  return ref
+      .read(timestampDataRepositoryProvider)
       .getSnapshots()
       .map((e) => e.docs.map((data) => _convert(data.data())).toList());
 }
