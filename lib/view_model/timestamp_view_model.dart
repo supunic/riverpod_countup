@@ -35,6 +35,6 @@ TimestampData _convert(Object? obj) {
     return TimestampData.empty();
   }
 
-  var map = obj as Map<String, dynamic>;
+  final map = obj as Map<String, dynamic>;
   return TimestampData.fromJson(map);
 }
