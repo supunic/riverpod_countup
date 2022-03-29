@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>942540730759-m6a1bptgdsu2tbbf5f7r9hc8srulpjq1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.942540730759-m6a1bptgdsu2tbbf5f7r9hc8srulpjq1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCK9zjZ32hGpR_qCRWUs-XneTtuPkGRhC0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>942540730759</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.reverpodcountup</string>
+	<key>PROJECT_ID</key>
+	<string>reverpod-countup</string>
+	<key>STORAGE_BUCKET</key>
+	<string>reverpod-countup.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:942540730759:ios:4c1d7785e9fa9a37b5a322</string>
+</dict>
+</plist>
